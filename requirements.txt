@@ -1,0 +1,14 @@
+sanic
+webtest
+
+# Testing
+pytest
+pytest-cov
+aiohttp
+
+# Packaging
+wheel
+twine
+
+#Coverage
+codecov
