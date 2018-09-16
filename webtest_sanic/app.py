@@ -71,10 +71,8 @@ class TestApp(webtest.TestApp):
     def __init__(self, app, *args, **kwargs):
         self.sanic_app = None
         #checking for the loop for Sanic
-        print(app)
         if isinstance(app, sanic.app.Sanic):
             if 'loop' in kwargs:
-                print("ddd")
                 loop = kwargs.pop('loop')
             else:
                 raise ValueError('Must provide a loop to TestApp')

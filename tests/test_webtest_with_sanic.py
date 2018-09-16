@@ -33,7 +33,6 @@ def echo_headers(request):
     result = {}
     for key in request.headers:
         result[key] = request.headers.get(key)
-    print(result)
     return J(result)
 
 @app.route('/echo_params', methods=["GET",])
@@ -67,7 +66,6 @@ def test_post_json(wt):
 
 def test_headers(wt):
     res = wt.get('/echo_headers', headers={'X-Foo': 'Bar'})
-    print(res)
     assert res.json['x-foo'] == 'Bar'
 
 
