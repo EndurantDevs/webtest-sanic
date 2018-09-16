@@ -1,3 +1,8 @@
+"""
+Original code from pytest-sanic. Please check NOTICE for more info.
+Used for webtest integration without pytest-sanic dependency because of pytest plugin problems:
+pytest-aiohttp and pytest-sanic
+"""
 from aiohttp import ClientSession, CookieJar
 from sanic.server import serve, HttpProtocol
 from inspect import isawaitable
