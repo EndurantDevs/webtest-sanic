@@ -34,7 +34,7 @@ setup(
     author_email='info@endurantdevs.com',
     credits='Steven Loria, Yun Xu',
     url='https://github.com/EndurantDevs/webtest_sanic',
-    py_modules=['webtest_sanic'],
+    packages=['webtest_sanic'],
     install_requires=REQUIRES,
     license='MIT',
     zip_safe=False,
