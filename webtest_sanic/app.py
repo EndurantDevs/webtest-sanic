@@ -1,5 +1,5 @@
 """
-webtest-sanic provides integration of WebTest with sanic applications
+webtest-sanic provides integration of WebTest with Sanic applications
 
 .. code-block:: python
 
@@ -30,7 +30,7 @@ from .utils import TestClient
 
 
 def WSGIHandler(app, loop):
-    """Return a wsgi application given an `aiohttp.web.Application`."""
+    """Return a wsgi application given an `sanic.app.Sanic`."""
 
     def handle(environ, start_response):
         #initializing of TestClient

@@ -34,14 +34,14 @@ Initially it was created to enable Sanic support in [Webargs](https://github.com
 It is easy to do from `pip`
 
 ```
-pip install webstat-sanic
+pip install webtest-sanic
 ```
 
 or from sources
 
 ```
-git clone git@github.com:EndurantDevs/webstat-sanic.git
-cd webstat-sanic
+git clone git@github.com:EndurantDevs/webtest-sanic.git
+cd webtest-sanic
 python setup.py install
 ```
 
