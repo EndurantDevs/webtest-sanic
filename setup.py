@@ -3,7 +3,8 @@ import re
 from setuptools import setup
 
 REQUIRES = [
-    'webtest'
+    'webtest',
+    'aiohttp'
 ]
 
 def find_version(fname):
