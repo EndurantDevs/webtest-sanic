@@ -170,7 +170,7 @@ class TestClient:
         if not isinstance(app, Sanic):
             raise TypeError("app should be a Sanic application.")
         self._app = app
-        self._loop = loop
+        self._loop = asyncio.get_event_loop()
         # we should use '127.0.0.1' in most cases.
         self._host = host
         self._ssl = ssl
@@ -181,12 +181,6 @@ class TestClient:
             self._app, loop=self._loop,
             protocol=self._protocol, ssl=self._ssl,
             scheme=self._scheme)
-        cookie_jar = CookieJar(unsafe=True, loop=loop)
-        self._session = ClientSession(loop=loop,
-                                      cookie_jar=cookie_jar,
-                                      **kwargs)
-        # Let's collect responses objects and websocket objects,
-        # and clean up when test is done.
         self._responses = []
         self._websockets = []
 
@@ -206,9 +200,9 @@ class TestClient:
     def server(self):
         return self._server
 
-    @property
-    def session(self):
-        return self._session
+    # @property
+    # def session(self):
+    #     return self._session
 
     def make_url(self, uri):
         return self._server.make_url(uri)
@@ -228,17 +222,19 @@ class TestClient:
                 resp.close()
             for ws in self._websockets:
                 await ws.close()
-            await self._session.close()
+            #await self._session.close()
             await self._server.close()
             self._closed = True
 
     async def _request(self, method, uri, *args, **kwargs):
         url = self._server.make_url(uri)
-        response = await self._session.request(
-            method, url, *args, **kwargs
-        )
-        self._responses.append(response)
-        return response
+        cookie_jar = CookieJar(unsafe=True, loop=self._loop)
+        async with ClientSession(loop=asyncio.get_event_loop(), cookie_jar=cookie_jar) as session:
+            response = await session.request(
+                method, url, *args, **kwargs
+            )
+            self._responses.append(response)
+            return response
 
     async def get(self, uri, *args, **kwargs):
         return await self._request(GET, uri, *args, **kwargs)
@@ -268,12 +264,14 @@ class TestClient:
         a thin wrapper around aiohttp.ClientSession.ws_connect.
         """
         url = self._server.make_url(uri)
-        ws_conn = await self._session.ws_connect(
-            url, *args, **kwargs
-        )
-        # Save it, clean up later.
-        self._websockets.append(ws_conn)
-        return ws_conn
+        cookie_jar = CookieJar(unsafe=True, loop=self._loop)
+        async with ClientSession(loop=asyncio.get_event_loop(), cookie_jar=cookie_jar) as session:
+            ws_conn = await session.ws_connect(
+                url, *args, **kwargs
+            )
+            # Save it, clean up later.
+            self._websockets.append(ws_conn)
+            return ws_conn
 
     # Context Manager
     async def __aenter__(self):

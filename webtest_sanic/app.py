@@ -23,9 +23,9 @@ webtest-sanic provides integration of WebTest with Sanic applications
         assert res.status_code == 200
         assert res.json == {'message': 'Hello world'}
 """
-import sanic
+
 import webob
-import webtest
+
 from .utils import TestClient
 
 
@@ -35,7 +35,7 @@ def WSGIHandler(app, loop):
     def handle(environ, start_response):
         #initializing of TestClient
         #it starts TestServer by itself
-        client = TestClient(app, loop=loop)
+        client = TestClient(app)
         loop.run_until_complete(client.start_server())
         req = webob.Request(environ)
         #Using internal method of pytest-sanic.utils here
@@ -61,20 +61,3 @@ def WSGIHandler(app, loop):
         loop.run_until_complete(client.close())
         return res.app_iter
     return handle
-
-
-
-class TestApp(webtest.TestApp):
-    """A modified `webtest.TestApp` that can wrap an `sanic.app.Sanic`. Takes the same
-    arguments as `webtest.TestApp`.
-    """
-    def __init__(self, app, *args, **kwargs):
-        self.sanic_app = None
-        #checking for the loop for Sanic
-        if isinstance(app, sanic.app.Sanic):
-            if 'loop' in kwargs:
-                loop = kwargs.pop('loop')
-            else:
-                raise ValueError('Must provide a loop to TestApp')
-            self.sanic_app = app = WSGIHandler(app, loop)
-        super().__init__(app, *args, **kwargs)

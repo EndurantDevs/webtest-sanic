@@ -1,13 +1,9 @@
 # -*- coding: utf-8 -*-
 import asyncio
-import json
 import pytest
 from sanic import Sanic
 from sanic.response import json as J
 
-from webtest_sanic import TestApp
-
-loop = asyncio.get_event_loop()
 
 # creating test application
 app = Sanic()
@@ -43,10 +39,10 @@ def echo_headers(request):
 def echo_params(request):
     return J(request.args)
 
-
 @pytest.fixture()
 def wt():
-    return TestApp(app, loop=loop)
+    from webtest_sanic import TestApp
+    return TestApp(app, loop=asyncio.get_event_loop())
 
 
 def test_get(wt):
@@ -54,6 +50,7 @@ def test_get(wt):
     assert res.status_code == 200
     expected = {'message': 'Hello world'}
     assert res.json == expected
+
 
 
 def test_post_form(wt):
