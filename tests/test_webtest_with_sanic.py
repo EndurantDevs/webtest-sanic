@@ -6,7 +6,7 @@ from sanic.response import json as J
 
 
 # creating test application
-app = Sanic()
+app = Sanic(name="WebTest-Sanic-Test")
 
 
 @app.route('/', methods=["GET", ])

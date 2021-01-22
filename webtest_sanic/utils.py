@@ -9,6 +9,7 @@ from inspect import isawaitable
 from sanic.app import Sanic
 import socket
 import asyncio
+import sys
 
 HEAD = 'HEAD'
 GET = 'GET'
@@ -131,7 +132,10 @@ class TestServer:
                     coros.append(conn.websocket.close_connection())
                 else:
                     conn.close()
-            await asyncio.gather(*coros, loop=self.loop)
+            if (sys.version_info[0] == 3) and (sys.version_info[1] < 8):
+                await asyncio.gather(*coros, loop=self.loop)
+            else:
+                await asyncio.gather(*coros)
 
             # Trigger after_stop events
             await trigger_events(self.after_server_stop, self.loop)
