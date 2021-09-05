@@ -4,7 +4,8 @@ from setuptools import setup
 
 REQUIRES = [
     'webtest',
-    'aiohttp'
+    'aiohttp',
+    'sanic'
 ]
 
 def find_version(fname):
