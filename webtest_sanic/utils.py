@@ -106,8 +106,8 @@ class TestServer:
         self.before_server_stop = server_settings.get('before_stop', [])
         self.after_server_stop = server_settings.get('after_stop', [])
 
-        server_settings.pop('main_start')
-        server_settings.pop('main_stop')
+        server_settings.pop('main_start', None)
+        server_settings.pop('main_stop', None)
 
         # Trigger before_start events
         await trigger_events(self.before_server_start, self.loop)
