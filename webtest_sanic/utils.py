@@ -92,9 +92,20 @@ class TestServer:
 
         # Let's get listeners
         self.before_server_start = server_settings.get('before_start', [])
+
+
+        if self.app.router:
+            self.app.router.reset()
+
+        # remove sanic's duplication of finalize methods from 21.3
+        self.before_server_start = list({x.func:x for x in self.before_server_start }.values())
+
         self.after_server_start = server_settings.get('after_start', [])
         self.before_server_stop = server_settings.get('before_stop', [])
         self.after_server_stop = server_settings.get('after_stop', [])
+
+        server_settings.pop('main_start')
+        server_settings.pop('main_stop')
 
         # Trigger before_start events
         await trigger_events(self.before_server_start, self.loop)

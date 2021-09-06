@@ -47,10 +47,10 @@ def wt():
 
 def test_get(wt):
     res = wt.get('/')
+    res = wt.get('/')
     assert res.status_code == 200
     expected = {'message': 'Hello world'}
     assert res.json == expected
-
 
 
 def test_post_form(wt):
