@@ -29,11 +29,11 @@ __version__ = find_version('webtest_sanic/__init__.py')
 setup(
     name='webtest-sanic',
     version=__version__,
-    description='webtest-sanic provides integration of WebTest with sanic applications',
+    description='webtest-sanic provides integration of WebTest with Sanic applications',
     long_description=open('README.md').read(),
     long_description_content_type='text/markdown',
     author='Endurant Devs',
-    author_email='info@endurantdevs.com',
+    author_email='info@endurantdev.com',
     credits='Steven Loria, Yun Xu',
     url='https://github.com/EndurantDevs/webtest_sanic',
     packages=['webtest_sanic'],
