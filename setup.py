@@ -32,7 +32,7 @@ setup(
     description='webtest-sanic provides integration of WebTest with Sanic applications',
     long_description=open('README.md').read(),
     long_description_content_type='text/markdown',
-    author='Endurant Devs',
+    author='Endurant Devs, Dmytro Nikolayev',
     author_email='info@endurantdev.com',
     credits='Steven Loria, Yun Xu',
     url='https://github.com/EndurantDevs/webtest_sanic',
