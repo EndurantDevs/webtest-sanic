@@ -5,6 +5,8 @@ pytest-aiohttp and pytest-sanic
 """
 from aiohttp import ClientSession, CookieJar
 from sanic.server import serve, HttpProtocol
+from sanic import __version__ as sanic_version
+from packaging import version
 from inspect import isawaitable
 from sanic.app import Sanic
 import socket
@@ -94,7 +96,7 @@ class TestServer:
         self.before_server_start = server_settings.get('before_start', [])
 
 
-        if self.app.router:
+        if version.parse(sanic_version) >= version.parse("21.3.0") and self.app.router:
             self.app.router.reset()
 
         # remove sanic's duplication of finalize methods from 21.3
