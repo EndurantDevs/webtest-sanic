@@ -1,8 +1,8 @@
 # webtest-sanic
-Integration of WebTest with [Sanic](https://github.com/huge-success/sanic) applications
+Integration of [WebTest](https://github.com/Pylons/webtest) with [Sanic](https://github.com/huge-success/sanic) applications
 Initially it was created to enable Sanic support in [Webargs](https://github.com/sloria/webargs) module
 
-[![Build Status](https://img.shields.io/travis/EndurantDevs/webtest-sanic.svg?logo=travis)](https://travis-ci.com/EndurantDevs/webtest-sanic) [![Latest Version](https://pypip.in/version/webtest-sanic/badge.svg)](https://pypi.python.org/pypi/webtest-sanic/) [![Python Versions](https://img.shields.io/pypi/pyversions/webtest-sanic.svg)](https://github.com/EndurantDevs/webtest-sanic/blob/master/setup.py) [![Tests Coverage](https://img.shields.io/codecov/c/github/EndurantDevs/webtest-sanic/master.svg)](https://codecov.io/gh/EndurantDevs/webtest-sanic)
+[![Build Status](https://img.shields.io/travis/EndurantDevs/webtest-sanic.svg?logo=travis)](https://app.travis-ci.com/EndurantDevs/webtest-sanic) [![Latest Version](https://pypip.in/version/webtest-sanic/badge.svg)](https://pypi.python.org/pypi/webtest-sanic/) [![Python Versions](https://img.shields.io/pypi/pyversions/webtest-sanic.svg)](https://github.com/EndurantDevs/webtest-sanic/blob/master/setup.py) [![Tests Coverage](https://img.shields.io/codecov/c/github/EndurantDevs/webtest-sanic/master.svg)](https://codecov.io/gh/EndurantDevs/webtest-sanic)
 
 ### Example Code ###
 
